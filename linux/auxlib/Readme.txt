@@ -1,0 +1,1 @@
+1.auxlib中(libz、libcurl、libssl、libcrypto)若Linux环境中已经存在，可以不用添加；
