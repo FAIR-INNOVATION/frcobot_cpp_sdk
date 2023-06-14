@@ -268,9 +268,10 @@ public:
 	 *@param  [in] acc  加速度百分比，范围[0~100],暂不开放
 	 *@param  [in] ovl  速度缩放因子，范围[0~100]
 	 *@param  [in] blendR [-1.0]-运动到位(阻塞)，[0~1000.0]-平滑半径(非阻塞)，单位mm
+	 *@param  [in] lastFlag [0,1] 0-样条曲线中间点，执行完继续执行下一个点，1-样条曲线终止点，执行完减速停止
 	 *@return  错误码
 	 */	 
-	errno_t  NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR);
+	errno_t  NewSplinePoint(JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, int lastFlag);
 	
 	/**
 	 *@brief 新样条运动结束

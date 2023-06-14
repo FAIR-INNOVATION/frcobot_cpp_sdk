@@ -76,10 +76,10 @@ int main(void)
     int err1 = robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT,flag, &offset_pos);
     printf("movej errcode:%d\n", err1);
     robot.NewSplineStart(type);
-    robot.NewSplinePoint(&j1, &desc_pos1, tool, user, vel, acc, ovl, blendR);
-    robot.NewSplinePoint(&j2, &desc_pos2, tool, user, vel, acc, ovl, blendR);
-    robot.NewSplinePoint(&j3, &desc_pos3, tool, user, vel, acc, ovl, blendR);
-    robot.NewSplinePoint(&j4, &desc_pos4, tool, user, vel, acc, ovl, blendR);
+    robot.NewSplinePoint(&j1, &desc_pos1, tool, user, vel, acc, ovl, blendR, 0);
+    robot.NewSplinePoint(&j2, &desc_pos2, tool, user, vel, acc, ovl, blendR, 0);
+    robot.NewSplinePoint(&j3, &desc_pos3, tool, user, vel, acc, ovl, blendR, 0);
+    robot.NewSplinePoint(&j4, &desc_pos4, tool, user, vel, acc, ovl, blendR, 1);
     robot.NewSplineEnd();
 
     return 0;
