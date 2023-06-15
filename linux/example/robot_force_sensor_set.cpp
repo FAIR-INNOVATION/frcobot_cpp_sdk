@@ -11,10 +11,10 @@ using namespace std;
 
 int main(void)
 {
-    FRRobot robot;                 //实例化机器人对象
-    robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+    FRRobot robot;                 //Instantiate the robot object
+    robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
-    /* 调整位姿 */
+    /* Adjust the pose */
     int tool, user;
     DescPose desc_pos;
     memset(&desc_pos, 0, sizeof(DescPose));

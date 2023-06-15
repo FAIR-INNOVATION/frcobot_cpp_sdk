@@ -5,8 +5,8 @@
 
 int main(void)
 {
-	FRRobot robot;                 //实例化机器人对象
-	robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+	FRRobot robot;                 //Instantiate the robot object
+	robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
 	JointPos j;
 	DescPose desc_pos, offset_pos1, offset_pos2;
@@ -43,8 +43,7 @@ int main(void)
 
 	robot.SetSpeed(20);
 
-	int ret = robot.GetForwardKin(&j, &desc_pos);  //只有关节位置的情况下，可用正运动学接口求解笛卡尔空间坐标
-
+	int ret = robot.GetForwardKin(&j, &desc_pos);  //The forward kinematic interface can be used to solve Cartesian space coordinates with only joint positions
 	if (ret == 0)
 	{
 		int err1 = robot.MoveJ(&j, &desc_pos, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos1);

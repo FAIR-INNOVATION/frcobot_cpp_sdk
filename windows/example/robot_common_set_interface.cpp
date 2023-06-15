@@ -4,8 +4,8 @@
 
 int main(void)
 {
-	FRRobot robot;                 //实例化机器人对象
-	robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+	FRRobot robot;                 //Instantiate the robot object
+	robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
 	int i;
 	float value;
@@ -26,7 +26,7 @@ int main(void)
 	for (i = 1; i < 21; i++)
 	{
 		robot.SetSysVarValue(i, i + 0.5);
-		Sleep(10);  //单位ms
+		Sleep(10);  //unit: ms
 	}
 
 	for (i = 1; i < 21; i++)

@@ -5,8 +5,8 @@
 
 int main(void)
 {
-	FRRobot robot;                 //实例化机器人对象
-	robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+	FRRobot robot;                 //Instantiate the robot object
+	robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
 	JointPos j1, j2;
 	DescPose desc_pos1, desc_pos2, offset_pos, offset_pos1;
@@ -57,7 +57,7 @@ int main(void)
 
 	robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
 	robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
-	Sleep(2000);    //单位ms
+	Sleep(2000);    //unit: ms
 	robot.PointsOffsetEnable(type, &offset_pos1);
 	robot.MoveJ(&j1, &desc_pos1, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);
 	int ret = robot.MoveJ(&j2, &desc_pos2, tool, user, vel, acc, ovl, &epos, blendT, flag, &offset_pos);

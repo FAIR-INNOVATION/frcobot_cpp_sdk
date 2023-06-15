@@ -5,8 +5,8 @@
 
 int main(void)
 {
-	FRRobot robot;                 //实例化机器人对象
-	robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+	FRRobot robot;                 //Instantiate the robot object
+	robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
 	JointPos j1, j2, j3, j4;
 	DescPose desc_pos1, desc_pos2, desc_pos3, desc_pos4, offset_pos;

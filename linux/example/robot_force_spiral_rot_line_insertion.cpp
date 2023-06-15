@@ -11,44 +11,44 @@ using namespace std;
 
 int main(void)
 {
-    FRRobot robot;                 //实例化机器人对象
-    robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+    FRRobot robot;                 //Instantiate the robot object
+    robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
-    //恒力参数
-    uint8_t status = 1;  //恒力控制开启标志，0-关，1-开
-    int sensor_num = 1; //力传感器编号
-    float gain[6] = {0.0001,0.0,0.0,0.0,0.0,0.0};  //最大阈值
-    uint8_t adj_sign = 0;  //自适应启停状态，0-关闭，1-开启
-    uint8_t ILC_sign = 0;  //ILC控制启停状态，0-停止，1-训练，2-实操
-    float max_dis = 100.0;  //最大调整距离
-    float max_ang = 5.0;  //最大调整角度
+    //Constant force parameter
+    uint8_t status = 1;  //Constant force control open sign, 0- off, 1- on
+    int sensor_num = 1; //Force sensor number
+    float gain[6] = {0.0001,0.0,0.0,0.0,0.0,0.0};  //Maximum threshold
+    uint8_t adj_sign = 0;  //Adaptive start-stop state, 0- off, 1- on
+    uint8_t ILC_sign = 0;  //ILC control start stop state, 0- stop, 1- training, 2- real operation
+    float max_dis = 100.0;  //Maximum adjustment distance
+    float max_ang = 5.0;  //Maximum adjustment Angle
 
     ForceTorque ft;
     memset(&ft, 0, sizeof(ForceTorque));
 
-    //螺旋线探索参数
-    int rcs = 0;  //参考坐标系，0-工具坐标系，1-基坐标系
-    float dr = 0.7;  //每圈半径进给量，单位mm
-    float fFinish = 1.0; //力或力矩阈值（0~100），单位N或Nm
-    float t = 60000.0; //最大探索时间，单位ms
-    float vmax = 5.0; //线速度最大值，单位mm/s
+    //Helix explore parameters
+    int rcs = 0;  //Reference frame, 0- tool frame, 1- base frame
+    float dr = 0.7;  //Radius feed per turn, unit: mm
+    float fFinish = 1.0; //Force or torque threshold (0 to 100), unit: N or Nm
+    float t = 60000.0; //Maximum exploration time, unit: ms
+    float vmax = 5.0; //The maximum linear velocity, unit: mm/s
 
-    //直线插入参数
-    float force_goal = 50.0;  //力或力矩阈值（0~100），单位N或Nm
-    float lin_v = 3.0; //直线速度，单位mm/s
-    float lin_a = 0.0; //直线加速度，单位mm/s^2,暂不使用
-    float disMax = 100.0; //最大插入距离，单位mm
-    uint8_t linorn = 1; //插入方向，1-正方向，2-负方向
+    //Linear insertion parameter
+    float force_goal = 50.0;  //Force or torque threshold (0 to 100), unit: N or Nm
+    float lin_v = 3.0; //Linear velocity, unit: mm/s
+    float lin_a = 0.0; //Linear acceleration, unit: mm/s^2, not used yet
+    float disMax = 100.0; //Maximum insertion distance, in mm
+    uint8_t linorn = 1; //Insert direction, 1- positive, 2- negative
 
-    //旋转插入参数
-    float angVelRot = 2.0;  //旋转角速度，单位°/s
-    float forceInsertion = 1.0; //力或力矩阈值（0~100），单位N或Nm
-    int angleMax= 45; //最大旋转角度，单位°
-    uint8_t orn = 1; //力的方向，1-fz,2-mz
-    float angAccmax = 0.0; //最大旋转角加速度，单位°/s^2,暂不使用
-    uint8_t rotorn = 2; //旋转方向，1-顺时针，2-逆时针
+    //Rotational insertion parameter
+    float angVelRot = 2.0;  //Angular velocity of rotation, in °/s
+    float forceInsertion = 1.0; //Force or torque threshold (0 to 100), in N or Nm
+    int angleMax= 45; //Maximum rotation Angle, unit: °
+    uint8_t orn = 1; //Direction of force，1-fz,2-mz
+    float angAccmax = 0.0; //Maximum angular acceleration of rotation, unit: °/s^2, not in use
+    uint8_t rotorn = 2; //Rotation direction, 1- clockwise, 2- counterclockwise
 
-    uint8_t select0[6] = {1,1,1,0,0,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+    uint8_t select0[6] = {1,1,1,0,0,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
     gain[0] = 0.0001;
     ft.fz = -20.0;
     status = 1;
@@ -57,15 +57,15 @@ int main(void)
     status = 0;
     robot.FT_Control(status,sensor_num,select0,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-    uint8_t select1[6] = {1,1,1,0,0,0}; //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+    uint8_t select1[6] = {1,1,1,0,0,0}; //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
     ft.fz = -10.0;
     robot.FT_Control(status,sensor_num,select1,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
     robot.FT_SpiralSearch(rcs,dr,fFinish,t,vmax);
     status = 0;
     robot.FT_Control(status,sensor_num,select1,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-    uint8_t select2[6] = {1,1,1,0,0,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
-    gain[0] = 0.0001;
+    uint8_t select2[6] = {1,1,1,0,0,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
+    gain[0] = 0.00005;
     ft.fz = -30.0;
     status = 1;
     robot.FT_Control(status,sensor_num,select2,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
@@ -73,7 +73,7 @@ int main(void)
     status = 0;
     robot.FT_Control(status,sensor_num,select2,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-    uint8_t select3[6] = {0,0,1,1,1,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+    uint8_t select3[6] = {0,0,1,1,1,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
     ft.fz = -10.0;
     gain[0] = 0.0001;
     status = 1;
@@ -82,7 +82,7 @@ int main(void)
     status = 0;
     robot.FT_Control(status,sensor_num,select3,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);
 
-    uint8_t select4[6] = {1,1,1,0,0,0};  //六个自由度选择[fx,fy,fz,mx,my,mz]，0-不生效，1-生效
+    uint8_t select4[6] = {1,1,1,0,0,0};  //Six degrees of freedom options [fx,fy,fz,mx,my,mz], 0- does not work, 1- works
     ft.fz = -30.0;
     status = 1;
     robot.FT_Control(status,sensor_num,select4,&ft,gain,adj_sign,ILC_sign,max_dis,max_ang);

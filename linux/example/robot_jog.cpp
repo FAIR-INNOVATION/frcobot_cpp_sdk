@@ -11,13 +11,13 @@ using namespace std;
 
 int main(void)
 {
-    FRRobot robot;                 //实例化机器人对象
-    robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+    FRRobot robot;                 //Instantiate the robot object
+    robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
-    robot.StartJOG(0,1,0,20.0,20.0,30.0);   //单关节运动，StartJOG为非阻塞指令，运动状态下接收其他运动指令（包含StartJOG）会被丢弃
+    robot.StartJOG(0,1,0,20.0,20.0,30.0);   //For single-joint motion, StartJOG is a non-blocking command. Receiving other motion commands (including StartJOG) while in motion is discarded
     sleep(1);
-    //robot.StopJOG(1)  //机器人单轴点动减速停止
-    robot.ImmStopJOG();  //机器人单轴点动立即停止
+    //robot.StopJOG(1)  //Robot single axis point deceleration stop
+    robot.ImmStopJOG();  //The single axis of the robot stops immediately
     robot.StartJOG(0,2,1,20.0,20.0,30.0);
     sleep(1);
     robot.ImmStopJOG(); 
@@ -34,10 +34,10 @@ int main(void)
     sleep(1);
     robot.ImmStopJOG(); 
 
-    robot.StartJOG(2,1,0,20.0,20.0,30.0);   //基坐标系下点动
+    robot.StartJOG(2,1,0,20.0,20.0,30.0);   //Point in the base coordinate system
     sleep(1);
-    //robot.StopJOG(3)  //机器人单轴点动减速停止
-    robot.ImmStopJOG();  //机器人单轴点动立即停止
+    //robot.StopJOG(3)  //Robot single axis point deceleration stop
+    robot.ImmStopJOG();  //The single axis of the robot stops immediately
     robot.StartJOG(2,2,1,20.0,20.0,30.0);
     sleep(1);
     robot.ImmStopJOG(); 
@@ -54,10 +54,10 @@ int main(void)
     sleep(1);
     robot.ImmStopJOG(); 
 
-    robot.StartJOG(4,1,0,20.0,20.0,30.0);   //工具坐标系下点动
+    robot.StartJOG(4,1,0,20.0,20.0,30.0);   //Point in the tool coordinate system
     sleep(1);
-    //robot.StopJOG(5)  //机器人单轴点动减速停止
-    robot.ImmStopJOG();  //机器人单轴点动立即停止
+    //robot.StopJOG(5)  //Robot single axis point deceleration stop
+    robot.ImmStopJOG();  //The single axis of the robot stops immediately
     robot.StartJOG(4,2,1,20.0,20.0,30.0);
     sleep(1);
     robot.ImmStopJOG(); 
@@ -74,10 +74,10 @@ int main(void)
     sleep(1);
     robot.ImmStopJOG(); 
 
-    robot.StartJOG(8,1,0,20.0,20.0,30.0);   //工件坐标系下点动
+    robot.StartJOG(8,1,0,20.0,20.0,30.0);   //Point in the workpiece coordinate system
     sleep(1);
-    //robot.StopJOG(9)  //机器人单轴点动减速停止
-    robot.ImmStopJOG();  //机器人单轴点动立即停止
+    //robot.StopJOG(9)  //Robot single axis point deceleration stop
+    robot.ImmStopJOG();  //The single axis of the robot stops immediately
     robot.StartJOG(8,2,1,20.0,20.0,30.0);
     sleep(1);
     robot.ImmStopJOG(); 

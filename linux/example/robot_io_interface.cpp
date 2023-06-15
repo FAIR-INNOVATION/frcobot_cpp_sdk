@@ -11,8 +11,8 @@ using namespace std;
 
 int main(void)
 {
-    FRRobot robot;                 //实例化机器人对象
-    robot.RPC("192.168.58.2");     //与机器人控制器建立通信连接
+    FRRobot robot;                 //Instantiate the robot object
+    robot.RPC("192.168.58.2");     //Establish a communication connection with the robot controller
 
     uint8_t status = 1; 
     uint8_t smooth = 0;
@@ -70,16 +70,16 @@ int main(void)
     
     robot.GetDI(0, block, &di);
     printf("di0:%u\n", di);
-    robot.WaitDI(0,1,0,2);              //一直等待
-    robot.WaitMultiDI(1,3,3,10000,2);   //一直等待
+    robot.WaitDI(0,1,0,2);              //Have been waiting
+    robot.WaitMultiDI(1,3,3,10000,2);   //Have been waiting
     tool_di = robot.GetToolDI(1, block, &tool_di);
     printf("tool_di1:%u\n", tool_di);
-    robot.WaitToolDI(1,1,0,2);          //一直等待
+    robot.WaitToolDI(1,1,0,2);          //Have been waiting
 
     robot.GetAI(0,block, &ai);
     printf("ai0:%f\n", ai);
-    robot.WaitAI(0,0,50,0,2);           //一直等待
-    robot.WaitToolAI(0,0,50,0,2);       //一直等待
+    robot.WaitAI(0,0,50,0,2);           //Have been waiting
+    robot.WaitToolAI(0,0,50,0,2);       //Have been waiting
     tool_ai = robot.GetToolAI(0,block, &tool_ai);
     printf("tool_ai0:%f\n", tool_ai);
 
