@@ -1,2 +1,2 @@
-1.windows 64位操作系统
-2.开发环境 Visual Studio 2013
+1.Windows 64-bit Operating System
+2.Development Environment Visual Studio 2013
