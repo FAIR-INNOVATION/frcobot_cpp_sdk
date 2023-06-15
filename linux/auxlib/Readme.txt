@@ -1,1 +1,1 @@
-1.auxlib中(libz、libcurl、libssl、libcrypto)若Linux环境中已经存在，可以不用添加；
+1. In auxlib (libz, libcurl, libssl, libcrypto), if it already exists in the Linux environment, you can not add it;
